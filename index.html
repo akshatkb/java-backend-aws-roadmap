@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  :root{
+    --bg: #0a1128;
+    --bg2: #0d1638;
+    --green: #4ade80;
+    --gold: #eab308;
+    --purple: #a855f7;
+    --blue: #38bdf8;
+    --pink: #ec4899;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --card-bg: #101a3d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--text);
+    width: 1600px;
+  }
+  .page{ padding: 24px; }
+
+  /* ===== HEADER ===== */
+  .header-row{
+    display:flex;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  .title-box{
+    flex: 1.6;
+    background: linear-gradient(135deg,#0d2159,#0a1a45);
+    border: 1px solid #24407a;
+    border-radius:10px;
+    padding:16px 22px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .title-box .icon{font-size:44px;}
+  .title-box h1{
+    margin:0 0 6px 0;
+    font-size:26px;
+    letter-spacing:0.5px;
+    color:#fff;
+  }
+  .title-box ul{margin:4px 0 0 0;padding-left:18px;font-size:13px;color:#cbd5e1;}
+  .title-box a{color:var(--green); text-decoration:none;}
+
+  .start-col{
+    flex:0.55;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    justify-content:center;
+  }
+  .pill{
+    border:1.5px solid var(--green);
+    border-radius:8px;
+    background:#0d1638;
+    padding:8px 14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:13px;
+  }
+  .pill .pi{font-size:20px;}
+  .pill b{display:block;color:#fff;font-size:14px;}
+  .arrow-down{
+    align-self:center;
+    color:var(--green);
+    font-size:16px;
+  }
+
+  .legend-box{
+    flex:0.8;
+    border:1px solid #24407a;
+    border-radius:10px;
+    padding:10px 16px;
+    background:#0d1638;
+  }
+  .legend-box h3{margin:0 0 8px 0;color:var(--gold);font-size:15px;text-align:center;letter-spacing:1px;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:12.5px;margin:4px 0;}
+  .dot{width:10px;height:10px;border-radius:2px;}
+
+  /* ===== PHASES GRID ===== */
+  .phases{
+    display:grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap:10px;
+  }
+  .phase-header{
+    border:1.5px solid;
+    border-radius:8px;
+    padding:8px 8px;
+    text-align:center;
+    background:#0d1638;
+  }
+  .phase-header .pnum{font-size:10.5px;letter-spacing:1px;font-weight:700;}
+  .phase-header .pname{font-size:13px;font-weight:700;color:#fff;margin-top:2px;}
+  .phase-header .pweek{font-size:10.5px;color:var(--muted);margin-top:1px;}
+
+  .course-card{
+    border:1px solid #2a4a8a;
+    border-radius:8px;
+    background:var(--card-bg);
+    padding:8px 9px;
+    font-size:10.8px;
+    min-height:150px;
+  }
+  .course-card .clabel{color:var(--blue);font-size:9px;letter-spacing:1px;font-weight:700;margin-bottom:3px;}
+  .course-card .ctitle{color:#fff;font-weight:700;font-size:11.5px;line-height:1.25;margin-bottom:3px;}
+  .course-card .cinst{color:var(--muted);font-size:9.5px;margin-bottom:5px;}
+  .course-card a{color:var(--blue);text-decoration:none;font-size:9px;word-break:break-all;line-height:1.3;}
+  .course-card .link-label{color:var(--muted);font-size:9px;}
+
+  .learn-box{
+    border:1px solid #7a6a10;
+    border-radius:8px;
+    background: #171307;
+    padding:7px 9px;
+    font-size:10px;
+  }
+  .learn-box .llabel{color:var(--gold);font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:4px;}
+  .learn-box ul{margin:0;padding-left:14px;color:#e7e0c9;}
+  .learn-box li{margin-bottom:2px;}
+
+  .project-box{
+    border:1px solid #5a2a8a;
+    border-radius:8px;
+    background:#170c2b;
+    padding:9px 10px;
+    font-size:10.5px;
+    text-align:center;
+  }
+  .project-box .plabel{color:var(--purple);font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:3px;}
+  .project-box .ptitle{color:#fff;font-weight:700;font-size:11.5px;}
+  .project-box .pdesc{color:var(--muted);font-size:9px;margin-top:3px;}
+
+  .span2{grid-column: span 2;}
+  .span3{grid-column: span 3;}
+
+  .deploy-box{
+    border:1px solid #b35c00;
+    background:#241405;
+    border-radius:8px;
+    padding:9px 10px;
+    text-align:center;
+  }
+  .deploy-box .plabel{color:#f59e0b;font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:3px;}
+  .deploy-box .ptitle{color:#fff;font-weight:700;font-size:12px;}
+  .deploy-box .pdesc{color:#d9b98a;font-size:9px;margin-top:3px;}
+
+  .empty{visibility:hidden;}
+
+  /* ===== BOTTOM SECTION ===== */
+  .bottom{
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap:12px;
+    margin-top:18px;
+  }
+  .bsec{
+    border:1px solid #24407a;
+    border-radius:10px;
+    background:#0d1638;
+    padding:12px 14px;
+  }
+  .bsec h3{
+    margin:0 0 10px 0;
+    font-size:13.5px;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .tech-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:8px 10px;
+    font-size:11px;
+  }
+  .tech-grid div{display:flex;align-items:center;gap:6px;color:#dbe3f0;}
+  .tech-dot{width:8px;height:8px;border-radius:50%;flex:none;}
+
+  .plan-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px;color:#dbe3f0;}
+  .plan-row .day{color:var(--gold);font-weight:700;width:34px;}
+  .plan-row .task{flex:1;padding-left:6px;}
+
+  .check-list div{
+    font-size:11.5px;
+    color:#dbe3f0;
+    margin-bottom:8px;
+    display:flex;
+    align-items:flex-start;
+    gap:6px;
+  }
+  .check{color:var(--green);}
+
+  .res-list div{font-size:11px;color:#dbe3f0;margin-bottom:8px;}
+  .res-list a{color:var(--blue);text-decoration:none;}
+
+  .success{text-align:center;}
+  .success .word{
+    font-size:15px;
+    font-weight:800;
+    color:var(--green);
+    margin:6px 0;
+  }
+  .success .plus{color:var(--muted);font-size:12px;}
+  .trophy{font-size:26px;text-align:center;display:block;margin-bottom:4px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header-row">
+    <div class="title-box">
+      <div class="icon">☕</div>
+      <div>
+        <h1>JAVA BACKEND ENGINEER ROADMAP</h1>
+        <ul>
+          <li>✅ Step-by-Step Roadmap to Become an Interview-Ready Java Backend Developer</li>
+          <li>✅ All courses available on <a href="https://tcsglobal.udemy.com/" target="_blank">TCS Udemy Business</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="start-col">
+      <div class="pill" style="border-color:var(--green)">
+        <span class="pi">🚀</span>
+        <span><b>Start Your Journey</b>Goal: Backend Developer</span>
+      </div>
+      <div class="arrow-down">▼</div>
+      <div class="pill" style="border-color:var(--green)">
+        <span class="pi">📚</span>
+        <span><b>Core Foundation</b>Strengthen Java &amp; Programming</span>
+      </div>
+    </div>
+
+    <div class="legend-box">
+      <h3>LEGEND</h3>
+      <div class="legend-item"><span class="dot" style="background:var(--green)"></span> Learning Phase</div>
+      <div class="legend-item"><span class="dot" style="background:var(--gold)"></span> Hands-on / Practice</div>
+      <div class="legend-item"><span class="dot" style="background:var(--purple)"></span> Project</div>
+      <div class="legend-item"><span class="dot" style="background:var(--blue)"></span> Certification</div>
+      <div class="legend-item"><span class="dot" style="background:var(--pink)"></span> Interview Prep</div>
+    </div>
+  </div>
+
+  <!-- PHASE HEADERS -->
+  <div class="phases">
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 1</div><div class="pname">☕ Core Java</div><div class="pweek">(2–3 Weeks)</div></div>
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 2</div><div class="pname">🍃 Spring Boot</div><div class="pweek">(4 Weeks)</div></div>
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 3</div><div class="pname">🗄️ Database &amp; SQL</div><div class="pweek">(1 Week)</div></div>
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 4</div><div class="pname">🐙 Git &amp; GitHub</div><div class="pweek">(3 Days)</div></div>
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 5</div><div class="pname">✳️ Microservices</div><div class="pweek">(4–5 Weeks)</div></div>
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 6</div><div class="pname">☁️ AWS Cloud</div><div class="pweek">(2 Weeks)</div></div>
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 7</div><div class="pname">🐳 Docker &amp; Kubernetes</div><div class="pweek">(1–2 Weeks)</div></div>
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 8</div><div class="pname">🧪 Testing</div><div class="pweek">(1 Week)</div></div>
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 9</div><div class="pname">♾️ CI/CD</div><div class="pweek">(1 Week)</div></div>
+    <div class="phase-header" style="border-color:var(--green)"><div class="pnum" style="color:var(--green)">PHASE 10</div><div class="pname">🧩 System Design</div><div class="pweek">(3–4 Weeks)</div></div>
+
+    <!-- COURSE CARDS -->
+    <div class="course-card">
+      <div class="clabel">COURSE</div>
+      <div class="ctitle">Java Programming Masterclass</div>
+      <div class="cinst">Instructor: Tim Buchalka</div>
+      <div class="link-label">🔗 Link:</div>
+      <a href="https://tcsglobal.udemy.com/course/java-the-complete-java-developer-course/" target="_blank">tcsglobal.udemy.com/course/java-the-complete-java-developer-course/</a>
+    </div>
+    <div class="course-card">
+      <div class="clabel">COURSE</div>
+      <div class="ctitle">Spring Boot 4, Spring 7 &amp; Hibernate for Beginners</div>
+      <div class="cinst">Instructor: Chad Darby</div>
+      <div class="link-label">🔗 Link:</div>
+      <a href="https://tcsglobal.udemy.com/course/spring-hibernate-tutorial/" target="_blank">tcsglobal.udemy.com/course/spring-hibernate-tutorial/</a>
+    </div>
+    <div class="course-card">
+      <div class="clabel">COURSE</div>
+      <div class="ctitle">SQL - Complete Database Course</div>
+      <div class="cinst">(Choose any highly rated SQL course)</div>
+      <div class="link-label">🔗 Browse:</div>
+      <a href="https://tcsglobal.udemy.com/" target="_blank">tcsglobal.udemy.com/</a>
+    </div>
+    <div class="course-card">
+      <div class="clabel">COURSE</div>
+      <div class="ctitle">Git Complete: The Definitive Guide</div>
+      <div class="cinst">Instructor: Jason Taylor</div>
+      <div class="link-label">🔗 Link:</div>
+      <a href="https://tcsglobal.udemy.com/course/git-complete/" target="_blank">tcsglobal.udemy.com/course/git-complete/</a>
+    </div>
+    <div class="course-card">
+      <div class="clabel">COURSE</div>
+      <div class="ctitle">Master Microservices with Spring Boot &amp; Kubernetes</div>
+      <div class="cinst">Instructor: (Madan Reddy)</div>
+      <div class="link-label">🔗 Link:</div>
+      <a href="https://tcsglobal.udemy.com/course/master-microservices-with-spring-docker-kubernetes/" target="_blank">tcsglobal.udemy.com/course/master-microservices-with-spring-docker-kubernetes/</a>
+    </div>
+    <div class="course-card">
+      <div class="clabel">COURSE</div>
+      <div class="ctitle">Ultimate AWS Certified Cloud Practitioner</div>
+      <div class="cinst">Instructor: Stephane Maarek</div>
+      <div class="link-label">🔗 Link:</div>
+      <a href="https://tcsglobal.udemy.com/course/aws-certified-cloud-practitioner-new/" target="_blank">tcsglobal.udemy.com/course/aws-certified-cloud-practitioner-new/</a>
+    </div>
+    <div class="course-card">
+      <div class="clabel">COURSE</div>
+      <div class="ctitle">Docker &amp; Kubernetes: The Practical Guide</div>
+      <div class="cinst">Instructor: Maximilian Schwarzmüller</div>
+      <div class="link-label">🔗 Link:</div>
+      <a href="https://tcsglobal.udemy.com/course/docker-kubernetes-the-practical-guide/" target="_blank">tcsglobal.udemy.com/course/docker-kubernetes-the-practical-guide/</a>
+    </div>
+    <div class="course-card">
+      <div class="clabel">COURSE</div>
+      <div class="ctitle">JUnit 5 &amp; Mockito Masterclass</div>
+      <div class="cinst">(Choose any highly rated course)</div>
+      <div class="link-label">🔗 Browse:</div>
+      <a href="https://tcsglobal.udemy.com/" target="_blank">tcsglobal.udemy.com/</a>
+    </div>
+    <div class="course-card">
+      <div class="clabel">COURSE</div>
+      <div class="ctitle">CI/CD with Jenkins &amp; GitHub Actions</div>
+      <div class="cinst">(Choose any highly rated course)</div>
+      <div class="link-label">🔗 Browse:</div>
+      <a href="https://tcsglobal.udemy.com/" target="_blank">tcsglobal.udemy.com/</a>
+    </div>
+    <div class="course-card">
+      <div class="clabel">COURSE / RESOURCES</div>
+      <div class="ctitle">System Design</div>
+      <div class="cinst">(YouTube / Books / High Rated Course)</div>
+      <div class="link-label">🔗 Browse:</div>
+      <a href="https://tcsglobal.udemy.com/" target="_blank">tcsglobal.udemy.com/</a>
+    </div>
+
+    <!-- YOU'LL LEARN -->
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>Core Java</li><li>OOPs</li><li>Collections</li><li>Multithreading</li><li>Exception Handling</li><li>Streams, Lambda</li><li>JDBC</li></ul>
+    </div>
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>Spring Core</li><li>Spring Boot</li><li>Spring MVC</li><li>Spring Data JPA</li><li>Hibernate</li><li>REST APIs</li><li>Spring Security</li></ul>
+    </div>
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>Joins</li><li>Indexes</li><li>Transactions</li><li>Views</li><li>Stored Procedures</li><li>Query Optimization</li></ul>
+    </div>
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>Git Basics</li><li>Branching</li><li>Merge vs Rebase</li><li>Stash</li><li>Pull Requests</li><li>GitHub Workflows</li></ul>
+    </div>
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>Spring Cloud</li><li>Eureka, Config Server</li><li>API Gateway, OpenFeign</li><li>Kafka, RabbitMQ</li><li>Resilience4j</li><li>Docker, Kubernetes</li><li>Prometheus, Grafana</li><li>OAuth2, Security</li></ul>
+    </div>
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>IAM</li><li>EC2</li><li>S3</li><li>RDS</li><li>VPC</li><li>Lambda</li><li>CloudWatch</li><li>Route53</li></ul>
+    </div>
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>Docker Basics</li><li>Docker Compose</li><li>Kubernetes Basics</li><li>Pods, Services</li><li>Deployments</li><li>Ingress, Helm</li></ul>
+    </div>
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>Unit Testing</li><li>JUnit 5</li><li>Mockito</li><li>Integration Testing</li><li>REST Assured</li></ul>
+    </div>
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>Jenkins Basics</li><li>Pipelines</li><li>GitHub Actions</li><li>Build, Test</li><li>Docker Integration</li><li>Deployments</li></ul>
+    </div>
+    <div class="learn-box">
+      <div class="llabel">YOU'LL LEARN</div>
+      <ul><li>System Design Basics</li><li>Scalability</li><li>Load Balancing</li><li>Caching (Redis)</li><li>Database Sharding</li><li>CAP Theorem</li><li>Design Patterns</li></ul>
+    </div>
+
+    <!-- PROJECTS ROW -->
+    <div class="project-box">
+      <div class="plabel">PROJECT</div>
+      <div class="ptitle">Library Management System</div>
+    </div>
+    <div class="project-box">
+      <div class="plabel">PROJECT</div>
+      <div class="ptitle">Employee Management System</div>
+    </div>
+    <div class="project-box span3">
+      <div class="plabel">PROJECT</div>
+      <div class="ptitle">E-Commerce Microservices Application</div>
+      <div class="pdesc">User, Product, Order, Inventory, Payment Services<br>Tech: Spring Boot, Spring Cloud, Kafka, Docker, Kubernetes, Redis</div>
+    </div>
+    <div class="deploy-box span2">
+      <div class="plabel" style="color:#f59e0b">PROJECT</div>
+      <div class="ptitle">☁️ Deploy on AWS</div>
+      <div class="pdesc">EC2, S3, RDS, IAM, Docker, GitHub Actions<br>CI/CD Pipeline</div>
+    </div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="project-box">
+      <div class="plabel">PROJECT</div>
+      <div class="ptitle">Design a Scalable System</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM SECTION -->
+  <div class="bottom">
+    <div class="bsec">
+      <h3>⭐ TECH STACK YOU WILL MASTER</h3>
+      <div class="tech-grid">
+        <div><span class="tech-dot" style="background:#e76f00"></span>Java</div>
+        <div><span class="tech-dot" style="background:#6db33f"></span>Spring Boot</div>
+        <div><span class="tech-dot" style="background:#6db33f"></span>Spring Cloud</div>
+        <div><span class="tech-dot" style="background:#c2a5e0"></span>Hibernate</div>
+        <div><span class="tech-dot" style="background:#00758f"></span>MySQL</div>
+        <div><span class="tech-dot" style="background:#336791"></span>PostgreSQL</div>
+        <div><span class="tech-dot" style="background:#dc382d"></span>Redis</div>
+        <div><span class="tech-dot" style="background:#231f20"></span>Kafka</div>
+        <div><span class="tech-dot" style="background:#2496ed"></span>Docker</div>
+        <div><span class="tech-dot" style="background:#326ce5"></span>Kubernetes</div>
+        <div><span class="tech-dot" style="background:#ff9900"></span>AWS</div>
+        <div><span class="tech-dot" style="background:#f05032"></span>Git &amp; GitHub</div>
+        <div><span class="tech-dot" style="background:#25a162"></span>JUnit</div>
+        <div><span class="tech-dot" style="background:#78ab5e"></span>Mockito</div>
+        <div><span class="tech-dot" style="background:#4285f4"></span>CI/CD</div>
+        <div><span class="tech-dot" style="background:#fcc624"></span>Linux</div>
+      </div>
+    </div>
+
+    <div class="bsec">
+      <h3>📅 WEEKLY PLAN (15–20 HRS)</h3>
+      <div class="plan-row"><span class="day">Mon</span><span class="task">Course + Coding (2 hrs)</span></div>
+      <div class="plan-row"><span class="day">Tue</span><span class="task">Build Project (2 hrs)</span></div>
+      <div class="plan-row"><span class="day">Wed</span><span class="task">DSA + SQL (2 hrs)</span></div>
+      <div class="plan-row"><span class="day">Thu</span><span class="task">Course (2 hrs)</span></div>
+      <div class="plan-row"><span class="day">Fri</span><span class="task">Project (2 hrs)</span></div>
+      <div class="plan-row"><span class="day">Sat</span><span class="task">Project + Revision (5 hrs)</span></div>
+      <div class="plan-row"><span class="day">Sun</span><span class="task">LeetCode + System Design (4 hrs)</span></div>
+    </div>
+
+    <div class="bsec">
+      <h3>🎯 INTERVIEW PREPARE</h3>
+      <div class="check-list">
+        <div><span class="check">✅</span>DSA &amp; Coding Practice (LeetCode)</div>
+        <div><span class="check">✅</span>SQL &amp; Database Concepts</div>
+        <div><span class="check">✅</span>Spring Boot &amp; Microservices</div>
+        <div><span class="check">✅</span>System Design</div>
+        <div><span class="check">✅</span>Mock Interviews &amp; Resume</div>
+      </div>
+    </div>
+
+    <div class="bsec">
+      <h3>📘 USEFUL RESOURCES</h3>
+      <div class="res-list">
+        <div>LeetCode – <a href="https://leetcode.com" target="_blank">leetcode.com</a></div>
+        <div>HackerRank – <a href="https://hackerrank.com" target="_blank">hackerrank.com</a></div>
+        <div>System Design Primer – GitHub</div>
+        <div>Books: DDIA, System Design Interview</div>
+        <div>AWS Docs – <a href="https://docs.aws.amazon.com" target="_blank">docs.aws.amazon.com</a></div>
+      </div>
+    </div>
+
+    <div class="bsec success">
+      <h3 style="justify-content:center">🏆 SUCCESS FORMULA</h3>
+      <div class="word">CONSISTENCY</div>
+      <div class="plus">+</div>
+      <div class="word">PRACTICE</div>
+      <div class="plus">+</div>
+      <div class="word">PROJECTS</div>
+      <div class="plus">=</div>
+      <div class="word" style="font-size:17px">SUCCESS</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
